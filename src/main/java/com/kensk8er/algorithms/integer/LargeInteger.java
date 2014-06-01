@@ -96,6 +96,12 @@ public class LargeInteger {
                 .replaceAll(String.format("%s$", StringUtils.repeat("0", digitDiff)), "");
     }
 
+    /**
+     * Format the return value (e.g. removing "-" when the value is 0)
+     *
+     * @param returnValue return value which you want to format
+     * @return formatted return value
+     */
     private static String formatReturn(String returnValue) {
         if (returnValue.equals("-0")) {
             return "0";
@@ -103,12 +109,25 @@ public class LargeInteger {
         return returnValue;
     }
 
+    /**
+     * Common assertions for large integer computations
+     *
+     * @param int1
+     * @param int2
+     */
     private static void assertNumbers(String int1, String int2) {
         Pattern pattern = Pattern.compile(String.format("^%s?\\d+", MINUS_SIGN));
         assert pattern.matcher(int1).find() : "int1 is not a valid number string.";
         assert pattern.matcher(int2).find() : "int2 is not a valid number string.";
     }
 
+    /**
+     * Compute int1 + int2 for large integers
+     *
+     * @param int1 first integer in String
+     * @param int2 second integer in String
+     * @return String of int1 + int2 value
+     */
     public static String addLargeIntegers(String int1, String int2) {
         assertNumbers(int1, int2);
 
@@ -153,10 +172,25 @@ public class LargeInteger {
         return sum.reverse().toString();
     }
 
+    /**
+     * Compute int1 + int2 + int3 for large integers. This just calls addLargeIntegers twice internally.
+     *
+     * @param int1
+     * @param int2
+     * @param int3
+     * @return
+     */
     public static String addLargeIntegers(String int1, String int2, String int3) {
         return addLargeIntegers(addLargeIntegers(int1, int2), int3);
     }
 
+    /**
+     * Compute int1 - int2 for large integers
+     *
+     * @param int1 large integer in String
+     * @param int2 large integer in String
+     * @return value of int1 - int2 in String
+     */
     public static String minusLargeIntegers(String int1, String int2) {
         assertNumbers(int1, int2);
 
