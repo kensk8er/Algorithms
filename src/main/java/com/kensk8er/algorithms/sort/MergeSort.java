@@ -11,12 +11,30 @@ import java.util.List;
  * Created by kensk8er
  */
 public class MergeSort {
+    /**
+     * MergeSort class implements merge sort on List<Integer>. It runs in N*log(N) time.
+     */
 
+    /**
+     * Count the number of inversions and return it.
+     *
+     * E.g. MergeSort.countInversions(Arrays.asList(2, 1, 0)) -> 3
+     * (* (2, 1), (2, 0), (1, 0) are inverted )
+     *
+     * @param list list of integers
+     * @return the number of inversions in the list
+     */
     public static long countInversions(List<Integer> list) {
         SortList sortList = sortAndCount(new SortList(list, 0));
         return sortList.inversionCount;
     }
 
+    /**
+     * Sort the list and at the same time count the number of inversions.
+     *
+     * @param sortList list to sort
+     * @return SortList object with sorted list and the inversion count
+     */
     private static SortList sortAndCount(SortList sortList) {
         int n = sortList.list.size();
 
@@ -62,6 +80,13 @@ public class MergeSort {
         return new SortList(mergedList, inversionCount);
     }
 
+    /**
+     * Sort a list of integers and return it.
+     * (It will create a new sorted list and doesn't sort the given list in place.)
+     *
+     * @param list list of integers
+     * @return sorted list of integers
+     */
     public static List<Integer> sort(List<Integer> list) {
         SortList sortList = sortAndCount(new SortList(list, 0));
         return sortList.list;
@@ -81,6 +106,11 @@ public class MergeSort {
         }
     }
 
+    /**
+     * Just for some debugs
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/_bcb5c6658381416d19b01bfc1d3993b5_IntegerArray.txt"));
