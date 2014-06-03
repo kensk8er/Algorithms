@@ -21,7 +21,7 @@ public class MergeSort {
      * E.g. MergeSort.countInversions(Arrays.asList(2, 1, 0)) -> 3
      * (* (2, 1), (2, 0), (1, 0) are inverted )
      *
-     * @param list list of integers
+     * @param list  list of integers
      * @return the number of inversions in the list
      */
     public static long countInversions(List<Integer> list) {
@@ -32,7 +32,7 @@ public class MergeSort {
     /**
      * Sort the list and at the same time count the number of inversions.
      *
-     * @param sortList list to sort
+     * @param sortList  list to sort
      * @return SortList object with sorted list and the inversion count
      */
     private static SortList sortAndCount(SortList sortList) {
@@ -84,7 +84,7 @@ public class MergeSort {
      * Sort a list of integers and return it.
      * (It will create a new sorted list and doesn't sort the given list in place.)
      *
-     * @param list list of integers
+     * @param list  list of integers
      * @return sorted list of integers
      */
     public static List<Integer> sort(List<Integer> list) {

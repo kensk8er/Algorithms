@@ -31,8 +31,8 @@ public class LargeInteger {
      * = a*c*10^2n + y*10^n + b*d  # y = x-a*c-b*d
      * (three multiplications only considering a*c*10^2n and b*d can be reused)
      *
-     * @param int1 1st integer in String
-     * @param int2 2nd integer in String, need to have the same number of digits as int1
+     * @param int1  1st integer in String
+     * @param int2  2nd integer in String, need to have the same number of digits as int1
      * @return multiplied integer in String
      */
     public static String multiplyLargeIntegers(String int1, String int2) {
@@ -99,7 +99,7 @@ public class LargeInteger {
     /**
      * Format the return value (e.g. removing "-" when the value is 0)
      *
-     * @param returnValue return value which you want to format
+     * @param returnValue  return value which you want to format
      * @return formatted return value
      */
     private static String formatReturn(String returnValue) {
@@ -112,8 +112,8 @@ public class LargeInteger {
     /**
      * Common assertions for large integer computations
      *
-     * @param int1
-     * @param int2
+     * @param int1  first integer string
+     * @param int2  second integer string
      */
     private static void assertNumbers(String int1, String int2) {
         Pattern pattern = Pattern.compile(String.format("^%s?\\d+", MINUS_SIGN));
@@ -124,8 +124,8 @@ public class LargeInteger {
     /**
      * Compute int1 + int2 for large integers
      *
-     * @param int1 first integer in String
-     * @param int2 second integer in String
+     * @param int1  first integer in String
+     * @param int2  second integer in String
      * @return String of int1 + int2 value
      */
     public static String addLargeIntegers(String int1, String int2) {
@@ -175,10 +175,10 @@ public class LargeInteger {
     /**
      * Compute int1 + int2 + int3 for large integers. This just calls addLargeIntegers twice internally.
      *
-     * @param int1
-     * @param int2
-     * @param int3
-     * @return
+     * @param int1  first integer string
+     * @param int2  second integer string
+     * @param int3  third integer string
+     * @return String of int1 + int2 + int3
      */
     public static String addLargeIntegers(String int1, String int2, String int3) {
         return addLargeIntegers(addLargeIntegers(int1, int2), int3);
@@ -187,8 +187,8 @@ public class LargeInteger {
     /**
      * Compute int1 - int2 for large integers
      *
-     * @param int1 large integer in String
-     * @param int2 large integer in String
+     * @param int1  large integer in String
+     * @param int2  large integer in String
      * @return value of int1 - int2 in String
      */
     public static String minusLargeIntegers(String int1, String int2) {
