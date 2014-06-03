@@ -1,5 +1,10 @@
 package main.java.com.kensk8er.algorithms.sort;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +14,8 @@ public class QuickSort {
     /**
      * QuickSort class implements quick sort on List<Integer>. It runs in N*log(N) time.
      */
+
+    // TODO: add documentation
 
     public enum PivotType {
         FIRST, LAST, MEDIAN,
@@ -138,6 +145,34 @@ public class QuickSort {
         SortList(List<Integer> list, long comparisonCount) {
             this.list = list;
             this.comparisonCount = comparisonCount;
+        }
+    }
+
+    /**
+     * Just for some debugs.
+     * @param args
+     */
+    public static void main(String args[]) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/_32387ba40b36359a38625cbb397eee65_QuickSort.txt"));
+            List<Integer> list = new ArrayList<>();
+            String line = br.readLine();
+
+            while (line != null) {
+                list.add(Integer.parseInt(line));
+                line = br.readLine();
+            }
+
+            System.out.print("First: ");
+            System.out.println(countComparisons(list, PivotType.FIRST));
+            System.out.print("Last: ");
+            System.out.println(countComparisons(list, PivotType.LAST));
+            System.out.print("Median: ");
+            System.out.println(countComparisons(list, PivotType.MEDIAN));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
