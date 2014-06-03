@@ -210,11 +210,11 @@ public class QuickSort {
             }
 
             System.out.print("First: ");
-            System.out.println(countComparisons(list, PivotType.FIRST));
+            System.out.println(countComparisons(new ArrayList<>(list), PivotType.FIRST));
             System.out.print("Last: ");
-            System.out.println(countComparisons(list, PivotType.LAST));
+            System.out.println(countComparisons(new ArrayList<>(list), PivotType.LAST));
             System.out.print("Median: ");
-            System.out.println(countComparisons(list, PivotType.MEDIAN));
+            System.out.println(countComparisons(new ArrayList<>(list), PivotType.MEDIAN));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
