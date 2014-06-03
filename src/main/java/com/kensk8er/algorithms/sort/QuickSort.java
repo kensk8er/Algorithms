@@ -10,16 +10,20 @@ public class QuickSort {
      * QuickSort class implements quick sort on List<Integer>. It runs in N*log(N) time.
      */
 
-    public static long countComparisons(List<Integer> list) {
-        SortList sortedList = sortAndCount(new SortList(list, 0));
+    public enum PivotType {
+        FIRST, LAST, MEDIAN,
+    }
+
+    public static long countComparisons(List<Integer> list, PivotType pivotType) {
+        SortList sortedList = sortAndCount(new SortList(list, 0), pivotType);
         return sortedList.comparisonCount;
     }
 
-    private static SortList sortAndCount(SortList sortList) {
-        return sortAndCount(sortList, 0, sortList.list.size());
+    private static SortList sortAndCount(SortList sortList, PivotType pivotType) {
+        return sortAndCount(sortList, 0, sortList.list.size(), pivotType);
     }
 
-    private static SortList sortAndCount(SortList sortList, int startId, int endId) {
+    private static SortList sortAndCount(SortList sortList, int startId, int endId, PivotType pivotType) {
         // check if it's base case, if so, no sort required
         if (endId - startId <= 1) {
             return sortList;
@@ -27,9 +31,7 @@ public class QuickSort {
 
         int partitionId = startId + 1;  // partition that separates less than and greater than pivot
         List<Integer> list = sortList.list;
-
-        // choose the first element as the pivot
-        int pivot = list.get(startId);
+        int pivot = getPivot(startId, endId, pivotType, list);
 
         for (int i = startId + 1; i < endId; i++) {
             int currentElement = list.get(i);
@@ -48,16 +50,80 @@ public class QuickSort {
         list.set(startId, tmp);
 
         // recursively sort
-        sortAndCount(sortList, startId, partitionId - 1);  // sort left half
-        sortAndCount(sortList, partitionId, endId);  // sort right half
+        sortAndCount(sortList, startId, partitionId - 1, pivotType);  // sort left half
+        sortAndCount(sortList, partitionId, endId, pivotType);  // sort right half
 
         // add comparisonCount
         sortList.comparisonCount += endId - startId - 1;
         return sortList;
     }
 
+    private static int getPivot(int startId, int endId, PivotType pivotType, List<Integer> list) {
+        int pivot;
+        int tmp;
+        switch (pivotType) {
+            case FIRST:
+                // choose the first element as the pivot
+                pivot = list.get(startId);
+                break;
+            case LAST:
+                // choose the last element as the pivot
+                pivot = list.get(endId - 1);
+
+                // swap the 1st element and the pivot
+                tmp = list.get(startId);
+                list.set(startId, list.get(endId - 1));
+                list.set(endId - 1, tmp);
+                break;
+            case MEDIAN:
+                // choose the median-of-three element as the pivot
+                int first = list.get(startId);
+                int middleId = (startId + endId - 1) / 2;
+                int middle = list.get(middleId);
+                int last = list.get(endId - 1);
+
+                // identify the median
+                int pivotId;
+                if (first < middle) {
+                    // first -> middle
+                    if (middle < last) {
+                        pivot = middle;
+                        pivotId = middleId;
+                    } else if (first < last) {
+                        pivot = last;
+                        pivotId = endId - 1;
+                    } else {
+                        pivot = first;
+                        pivotId = startId;
+                    }
+                } else {
+                    // middle -> first
+                    if (first < last) {
+                        pivot = first;
+                        pivotId = startId;
+                    } else if (middle < last) {
+                        pivot = last;
+                        pivotId = endId - 1;
+                    } else {
+                        pivot = middle;
+                        pivotId = middleId;
+                    }
+                }
+
+                // swap the 1st element and the pivot
+                tmp = list.get(startId);
+                list.set(startId, list.get(pivotId));
+                list.set(pivotId, tmp);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal pivotType");
+        }
+
+        return pivot;
+    }
+
     public static List<Integer> sort(List<Integer> list) {
-        SortList sortedList = sortAndCount(new SortList(list, 0));
+        SortList sortedList = sortAndCount(new SortList(list, 0), PivotType.MEDIAN);
         return sortedList.list;
     }
 
