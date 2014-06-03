@@ -15,21 +15,52 @@ public class QuickSort {
      * QuickSort class implements quick sort on List<Integer>. It runs in N*log(N) time.
      */
 
-    // TODO: add documentation
-
+    /**
+     * Pivot type dictates how the pivot value in a given sub-sequence is chosen. This has an effect
+     * on the size of sub-sequences that are passed to further recursions, thus affects running time
+     * of sort.
+     *
+     * FIRST -> always choose the first element of a sub-sequence as the pivot
+     * LAST -> always choose the last element of a sub-sequence as the pivot
+     * MEDIAN -> pick the first/middle/last element, compute the median, and use it as the pivot
+     */
     public enum PivotType {
         FIRST, LAST, MEDIAN,
     }
 
+    /**
+     * Count the number of comparisons that is required in order to sort the given list of integers
+     * and return it.
+     *
+     * @param list  list to sort
+     * @param pivotType  how to choose the pivot value when partitioning a sub-array
+     * @return the number of comparisons required
+     */
     public static long countComparisons(List<Integer> list, PivotType pivotType) {
         SortList sortedList = sortAndCount(new SortList(list, 0), pivotType);
         return sortedList.comparisonCount;
     }
 
+    /**
+     * Sort the given list and also count the number of comparisons.
+     *
+     * @param sortList  SortList object that has the list to sort
+     * @param pivotType  how to choose the pivot value when partitioning a sub-sequence
+     * @return SortList that has the sorted list and the number of comparisons required
+     */
     private static SortList sortAndCount(SortList sortList, PivotType pivotType) {
         return sortAndCount(sortList, 0, sortList.list.size(), pivotType);
     }
 
+    /**
+     * Sort the sub-sequence of the list specified by startId and endId.
+     *
+     * @param sortList  SortList object that has the list to sort
+     * @param startId  start ID of the sub-sequence
+     * @param endId  end ID of the sub-sequence
+     * @param pivotType  how to choose the pivot value when partitioning a sub-sequence
+     * @return SortList that has the sorted list and the number of comparisons required
+     */
     private static SortList sortAndCount(SortList sortList, int startId, int endId, PivotType pivotType) {
         // check if it's base case, if so, no sort required
         if (endId - startId <= 1) {
@@ -65,6 +96,15 @@ public class QuickSort {
         return sortList;
     }
 
+    /**
+     * Get the pivot value of the sub-sequence specified by startId and endId based on the pivotType.
+     *
+     * @param startId  start ID of the sub-sequence
+     * @param endId  end ID of the sub-sequence
+     * @param pivotType  how to choose the pivot value when partitioning a sub-sequence
+     * @param list  list to be sorted
+     * @return pivot value of the sub-sequence
+     */
     private static int getPivot(int startId, int endId, PivotType pivotType, List<Integer> list) {
         int pivot;
         int tmp;
@@ -129,6 +169,12 @@ public class QuickSort {
         return pivot;
     }
 
+    /**
+     * Sort the list of integers in-place and return it.
+     *
+     * @param list  list to be sorted
+     * @return sorted list
+     */
     public static List<Integer> sort(List<Integer> list) {
         SortList sortedList = sortAndCount(new SortList(list, 0), PivotType.MEDIAN);
         return sortedList.list;
