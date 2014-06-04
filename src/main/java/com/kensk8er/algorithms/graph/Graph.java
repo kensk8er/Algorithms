@@ -29,6 +29,14 @@ public class Graph {
         }
     }
 
+    public Graph(Graph graph) {
+        this.nodeIds = new HashSet<>(graph.nodeIds);
+        this.edges = new ArrayList<>();
+        for (Edge edge: graph.edges) {
+            this.edges.add(new Edge(edge));
+        }
+    }
+
     public int getNumNodes() {
         return this.nodeIds.size();
     }

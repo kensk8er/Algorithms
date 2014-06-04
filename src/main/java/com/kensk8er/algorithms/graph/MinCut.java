@@ -18,16 +18,16 @@ public class MinCut {
         int minCutDegree = N - 1;  // cut degree can't be larger than N - 1
 
         for (int i = 0; i < trialTime; i++) {
-            while (graph.getNumNodes() > 2) {
-                Edge edge = graph.sampleEdge();
-                contractEdge(graph, edge);
-                int numEdges = graph.getNumEdges();
-                if (numEdges < minCutDegree) {
-                    minCutDegree = numEdges;
-                }
+            Graph iGraph = new Graph(graph);
+            while (iGraph.getNumNodes() > 2) {
+                Edge edge = iGraph.sampleEdge();
+                contractEdge(iGraph, edge);
+            }
+            int numEdges = iGraph.getNumEdges();
+            if (numEdges < minCutDegree) {
+                minCutDegree = numEdges;
             }
         }
-
         return minCutDegree;
     }
 

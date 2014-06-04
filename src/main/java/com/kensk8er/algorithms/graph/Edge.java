@@ -19,6 +19,11 @@ public class Edge {
         }
     }
 
+    Edge(Edge edge) {
+        this.tailNodeId = edge.tailNodeId;
+        this.headNodeId = edge.headNodeId;
+    }
+
     public int getTailNodeId() {
         return tailNodeId;
     }
