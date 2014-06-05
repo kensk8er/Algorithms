@@ -1,7 +1,12 @@
 package main.java.com.kensk8er.algorithms.graph;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import static java.lang.Math.log;
 import static java.lang.Math.pow;
@@ -55,5 +60,39 @@ public class MinCut {
         for (Edge edge: removeEdges) {
             graph.removeEdge(edge);
         }
+    }
+
+    /**
+     * Just for some debugs.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        List<List<Integer>> matrix = new ArrayList<>();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/_f370cd8b4d3482c940e4a57f489a200b_kargerMinCut.txt"));
+            String line = br.readLine();
+
+            while (line != null) {
+                List<Integer> row = new ArrayList<>();
+                StringTokenizer st = new StringTokenizer(line, "\t");
+                int nodeId = Integer.parseInt(st.nextToken()) - 1;
+                while (st.hasMoreTokens()) {
+                    row.add(Integer.parseInt(st.nextToken()) - 1);
+                }
+                matrix.add(row);
+                line = br.readLine();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Graph graph = new Graph(matrix);
+        int minCutDegree = findMinCutDegree(graph);
+        System.out.println(minCutDegree);
     }
 }
