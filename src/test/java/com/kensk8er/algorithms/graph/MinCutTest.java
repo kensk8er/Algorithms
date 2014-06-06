@@ -120,6 +120,12 @@ class MinCutTest {
         assertEquals(findMinCutDegree(matrix6), 2);
     }
 
+    /**
+     * Just a helper method that subtract 1 from the node IDs (change the minimum node ID from 1 to 0).
+     *
+     * @param matrix  2-dimensional list that represents adjacency matrix
+     * @return matrix with each element being subtracted by 1
+     */
     private List<List<Integer>> decrementOne(List<List<Integer>> matrix) {
         for (int i = 0; i < matrix.size(); i++) {
             List<Integer> row = matrix.get(i);

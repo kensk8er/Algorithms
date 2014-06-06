@@ -14,9 +14,19 @@ import static java.lang.Math.pow;
 /**
  * Created by kensk8er
  *
+ * MinCut class implements findMinCutDegree method, which computes the degree of minimum cut of the
+ * graph using Randomized Algorithm.
+ *
  */
 public class MinCut {
 
+    /**
+     * Compute the degree of minimum cut (the number of edges that connect the sub-graphs A and B
+     * that constitute a minimum cut) and return it.
+     *
+     * @param graph  graph which you want to compute the degree of minimum cut
+     * @return the degree of minimum cut
+     */
     public static int findMinCutDegree(Graph graph) {
         int N = graph.getNumNodes();
         int trialTime = (int) Math.round(pow(N,  2) * log(N));
@@ -36,6 +46,12 @@ public class MinCut {
         return minCutDegree;
     }
 
+    /**
+     * Contract the edge of the graph and modify edges/nodes accordingly.
+     *
+     * @param graph  graph that has the edge you want to contract
+     * @param contractEdge  edge that you want to contract
+     */
     private static void contractEdge(Graph graph, Edge contractEdge) {
         // remove the tail nodeId of the contractEdge
         int removeNodeId = contractEdge.getTailNodeId();
