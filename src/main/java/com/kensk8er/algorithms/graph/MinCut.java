@@ -27,13 +27,13 @@ public class MinCut {
      * @param graph  graph which you want to compute the degree of minimum cut
      * @return the degree of minimum cut
      */
-    public static int findMinCutDegree(Graph graph) {
+    public static int findMinCutDegree(UndirectedGraph graph) {
         int N = graph.getNumNodes();
         int trialTime = (int) Math.round(pow(N,  2) * log(N));
         int minCutDegree = N - 1;  // cut degree can't be larger than N - 1
 
         for (int i = 0; i < trialTime; i++) {
-            Graph iGraph = new Graph(graph);
+            UndirectedGraph iGraph = new UndirectedGraph(graph);
             while (iGraph.getNumNodes() > 2) {
                 Edge edge = iGraph.sampleEdge();
                 contractEdge(iGraph, edge);
@@ -52,7 +52,7 @@ public class MinCut {
      * @param graph  graph that has the edge you want to contract
      * @param contractEdge  edge that you want to contract
      */
-    private static void contractEdge(Graph graph, Edge contractEdge) {
+    private static void contractEdge(UndirectedGraph graph, Edge contractEdge) {
         // remove the tail nodeId of the contractEdge
         int removeNodeId = contractEdge.getTailNodeId();
         graph.removeNodeId(removeNodeId);
@@ -107,7 +107,7 @@ public class MinCut {
             e.printStackTrace();
         }
 
-        Graph graph = new Graph(matrix);
+        UndirectedGraph graph = new UndirectedGraph(matrix);
         int minCutDegree = findMinCutDegree(graph);
         System.out.println(minCutDegree);
     }

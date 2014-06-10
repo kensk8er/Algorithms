@@ -1,6 +1,6 @@
 package test.java.com.kensk8er.algorithms.graph;
 
-import main.java.com.kensk8er.algorithms.graph.Graph;
+import main.java.com.kensk8er.algorithms.graph.UndirectedGraph;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MinCutTest {
     @Test
     void testFindMinCutDegree() {
-        Graph matrix1 = new Graph(decrementOne(Arrays.asList(
+        UndirectedGraph matrix1 = new UndirectedGraph(decrementOne(Arrays.asList(
                 Arrays.asList(2,3,4,7),
                 Arrays.asList(1,3,4),
                 Arrays.asList(1,2,4),
@@ -27,7 +27,7 @@ class MinCutTest {
         )));
         assertEquals(findMinCutDegree(matrix1), 2);
 
-        Graph matrix2 = new Graph(decrementOne(Arrays.asList(
+        UndirectedGraph matrix2 = new UndirectedGraph(decrementOne(Arrays.asList(
                 Arrays.asList(4, 2, 7, 3),
                 Arrays.asList(4, 1, 3),
                 Arrays.asList(1, 2, 4),
@@ -39,7 +39,7 @@ class MinCutTest {
         )));
         assertEquals(findMinCutDegree(matrix2), 2);
 
-        Graph matrix3 = new Graph(decrementOne(Arrays.asList(
+        UndirectedGraph matrix3 = new UndirectedGraph(decrementOne(Arrays.asList(
                 Arrays.asList(2, 3, 4),
                 Arrays.asList(1, 3, 4),
                 Arrays.asList(1, 2, 4),
@@ -51,7 +51,7 @@ class MinCutTest {
         )));
         assertEquals(findMinCutDegree(matrix3), 1);
 
-        Graph matrix4 = new Graph(decrementOne(Arrays.asList(
+        UndirectedGraph matrix4 = new UndirectedGraph(decrementOne(Arrays.asList(
                 Arrays.asList(1, 3, 4, 2),
                 Arrays.asList(2, 1, 4, 3),
                 Arrays.asList(3, 1, 2, 4),
@@ -63,7 +63,7 @@ class MinCutTest {
         )));
         assertEquals(findMinCutDegree(matrix4), 1);
 
-        Graph matrix5 = new Graph(decrementOne(Arrays.asList(
+        UndirectedGraph matrix5 = new UndirectedGraph(decrementOne(Arrays.asList(
                 Arrays.asList(1, 19, 15, 36, 23, 18, 39),
                 Arrays.asList(2, 36, 23, 4, 18, 26, 9),
                 Arrays.asList(3, 35, 6, 16, 11),
@@ -107,7 +107,7 @@ class MinCutTest {
         )));
         assertEquals(findMinCutDegree(matrix5), 3);
 
-        Graph matrix6 = new Graph(decrementOne(Arrays.asList(
+        UndirectedGraph matrix6 = new UndirectedGraph(decrementOne(Arrays.asList(
                 Arrays.asList(1, 2, 3, 4, 5),
                 Arrays.asList(2, 3, 4, 1),
                 Arrays.asList(3, 4, 1, 2),
