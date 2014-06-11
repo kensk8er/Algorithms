@@ -20,6 +20,16 @@ public class ShortestPath {
     public static final int DEFAULT_NODE_ID = -1;  // assume that there's no node Id defined as -1
     private static final int MAX_DIST = 1000000;
 
+    /**
+     * Compute shortest paths of all nodes from source node and return the minimum distances.
+     *
+     * When a node is not reachable from the source node, the distance of the node is set as
+     * `ShortestPath.MAX_DIST`.
+     *
+     * @param graph  graph in which you want to compute the shortest paths
+     * @param sourceNodeId  shortest paths of all the nodes from this source node are computed
+     * @return map of node ID being a key and its minimum distance being a value
+     */
     public static Map<Integer, Integer> getMinDists(WeightedUndirectedGraph graph,
                                                     int sourceNodeId) {
         Set<Integer> X = new HashSet<>();  // nodes that are already explored
@@ -42,6 +52,13 @@ public class ShortestPath {
         return A;
     }
 
+    /**
+     * Recursively compute the minimum distances for all the nodes. (Dijkstra's algorithm)
+     *
+     * @param graph  graph in which you want to compute the shortest paths
+     * @param X  all the node IDs that have been already explored
+     * @param A  map of node ID being a key and its minimum distance being a value
+     */
     private static void getMinDists(WeightedUndirectedGraph graph, Set<Integer> X,
                                     Map<Integer, Integer> A) {
         int minDist = MAX_DIST;
@@ -82,6 +99,14 @@ public class ShortestPath {
         }
     }
 
+    /**
+     * Get the minimum distances of specified nodes (nodeIds) from the source node in the graph.
+     *
+     * @param graph  graph in which you want to compute the shortest paths
+     * @param sourceNodeId  shortest paths of all the nodes from this source node are computed
+     * @param nodeIds  IDs of the nodes which you want to get minimum distances from the source node
+     * @return list of minimum distances of the nodes specified (in the same order)
+     */
     public static List<Integer> getMinDistsByNodeIds(WeightedUndirectedGraph graph,
                                                      int sourceNodeId, List<Integer> nodeIds) {
         Map<Integer, Integer> A = getMinDists(graph, sourceNodeId);
@@ -127,8 +152,7 @@ public class ShortestPath {
         WeightedUndirectedGraph graph = new WeightedUndirectedGraph(nodeIdToNodeIdLengthPairs);
         List<Integer> dists = getMinDistsByNodeIds(
                 graph, 1,
-//                Arrays.asList(7, 37, 59, 82, 99, 115, 133, 165, 188, 197));
-                Arrays.asList(1,2,3,4,5,6,7,8));
+                Arrays.asList(7, 37, 59, 82, 99, 115, 133, 165, 188, 197));
         System.out.println(dists.toString());
     }
 }

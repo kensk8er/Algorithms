@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public class WeightedUndirectedGraph extends AbstractGraph {
 
+    /**
+     * Initialize a WeightedUndirectedGraph object from adjacency list representation.
+     *
+     * @param nodeIdToNodeIdLengthPairs  map (key corresponds to each tail node ID) of list of node
+     *                                   ID/edge length pairs (node ID corresponds to head node ID)
+     */
     public WeightedUndirectedGraph(
             Map<Integer, List<Pair<Integer, Integer>>> nodeIdToNodeIdLengthPairs) {
         super();
