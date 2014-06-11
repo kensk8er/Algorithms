@@ -10,19 +10,19 @@ import java.util.*;
 public class UndirectedGraph extends AbstractGraph {
 
     /**
-     * Instantiate an UndirectedGraph object from a 2-dimensional list that represents an adjacency
-     * matrix.
+     * Instantiate an UndirectedGraph object from a 2-dimensional list which ID of the 1st dimension
+     * corresponds to tail node ID and the value of the 2nd dimension corresponds to head node ID.
      *
-     * @param matrix  2-dimensional list that represents adjacency matrix
+     * @param graph  2-dimensional list that represents a graph
      */
-    public UndirectedGraph(List<List<Integer>> matrix) {
+    public UndirectedGraph(List<List<Integer>> graph) {
         super();
-        for (int nodeId = 0; nodeId < matrix.size(); nodeId++) {
+        for (int nodeId = 0; nodeId < graph.size(); nodeId++) {
             this.nodeIds.add(nodeId);
 
-            for (int i = 0; i < matrix.get(nodeId).size(); i++) {
+            for (int i = 0; i < graph.get(nodeId).size(); i++) {
                 // when constructing a graph, doesn't allow it to have more than one same edge
-                Edge edge = new UndirectedEdge(nodeId, matrix.get(nodeId).get(i));
+                Edge edge = new UndirectedEdge(nodeId, graph.get(nodeId).get(i));
                 if (!this.edges.contains(edge)) {
                     this.edges.add(edge);
                 }
