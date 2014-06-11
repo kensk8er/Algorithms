@@ -87,7 +87,7 @@ public class MinCut {
         List<List<Integer>> matrix = new ArrayList<>();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/_f370cd8b4d3482c940e4a57f489a200b_kargerMinCut.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
             String line = br.readLine();
 
             while (line != null) {

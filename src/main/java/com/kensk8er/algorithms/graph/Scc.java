@@ -149,7 +149,7 @@ public class Scc {
         List<Edge> edges = new ArrayList<>();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/SCC.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
             String line = br.readLine();
 
             while (line != null) {

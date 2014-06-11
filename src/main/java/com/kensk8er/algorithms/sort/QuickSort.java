@@ -200,7 +200,7 @@ public class QuickSort {
      */
     public static void main(String args[]) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/_32387ba40b36359a38625cbb397eee65_QuickSort.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
             List<Integer> list = new ArrayList<>();
             String line = br.readLine();
 

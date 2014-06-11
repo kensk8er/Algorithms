@@ -113,7 +113,7 @@ public class MergeSort {
      */
     public static void main(String[] args) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/Users/kensk8er/Desktop/Study/algo1slides/_bcb5c6658381416d19b01bfc1d3993b5_IntegerArray.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
             List<Integer> list = new ArrayList<>();
             String line = br.readLine();
 
