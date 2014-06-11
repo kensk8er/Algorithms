@@ -46,4 +46,9 @@ abstract class AbstractEdge implements Edge {
         }
         return false;
     }
+
+    @Override
+    public int getLength() {
+        return 1;
+    }
 }

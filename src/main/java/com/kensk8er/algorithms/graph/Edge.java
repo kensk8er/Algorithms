@@ -22,4 +22,13 @@ public interface Edge {
      * @return true if equals (have equivalent node IDs), else false
      */
     boolean equals(Object o);
+
+    /**
+     * Returns the length of the edge.
+     *
+     * If the edge isn't weighted edge, simply always returns 1.
+     *
+     * @return length of the edge
+     */
+    int getLength();
 }
