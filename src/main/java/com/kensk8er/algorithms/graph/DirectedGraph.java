@@ -59,6 +59,11 @@ public class DirectedGraph extends AbstractGraph {
         }
     }
 
+    /**
+     * Initialize a DirectedGraph object from a collection of edges.
+     *
+     * @param edges  collection of edges
+     */
     public DirectedGraph(Collection<Edge> edges) {
         super();
         this.nodeIdToTailNodeIds = new HashMap<>();
@@ -88,10 +93,22 @@ public class DirectedGraph extends AbstractGraph {
         }
     }
 
+    /**
+     * Return all the head node IDs that point from the given node (ID).
+     *
+     * @param nodeId  ID of the node which edges point from
+     * @return all the head node IDs that point from the given node (ID)
+     */
     public Set<Integer> getHeadNodeIdsByNodeId(int nodeId) {
         return this.nodeIdToHeadNodeIds.getOrDefault(nodeId, new HashSet<>());
     }
 
+    /**
+     * Return all the tail node IDs that point to the given node (ID).
+     *
+     * @param nodeId  ID of the node which edges point to
+     * @return all the tail node IDs that point to the given node (ID)
+     */
     public Set<Integer> getTailNodeIdsByNodeId(int nodeId) {
         return this.nodeIdToTailNodeIds.getOrDefault(nodeId, new HashSet<>());
     }

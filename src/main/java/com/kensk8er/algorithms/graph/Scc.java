@@ -16,6 +16,12 @@ import java.util.*;
  */
 public class Scc {
 
+    /**
+     * Find SCCs (Strongly Connected Components) of the directed graph and return them.
+     *
+     * @param graph  directed graph that you want to find SCCs from
+     * @return node IDs of SCCs
+     */
     public static Set<Set<Integer>> findSccs(DirectedGraph graph) {
         Stack<Integer> nodeIdOrder = firstDfs(graph);
         Map<Integer, List<Integer>> leaderNodeIdToNodeIds = secondDfs(graph, nodeIdOrder);
@@ -26,6 +32,9 @@ public class Scc {
         return sccs;
     }
 
+    /**
+     * First DFS (Depth First Search) of Kosaraju's algortihm.
+     */
     private static Stack<Integer> firstDfs(DirectedGraph graph) {
         Set<Integer> seenNodeIds = new HashSet<>();
         Stack<Integer> nodeIdOrder = new Stack<>();
@@ -40,6 +49,9 @@ public class Scc {
         return nodeIdOrder;
     }
 
+    /**
+     * DFS in the backwards way (move from head to tail of an edge).
+     */
     private static void backwardDfs(DirectedGraph graph, int nodeId, Set<Integer> seenNodeIds,
                                     Stack<Integer> nodeIdOrder) {
         // search all the nodes in backwards
@@ -54,6 +66,9 @@ public class Scc {
         nodeIdOrder.push(nodeId);
     }
 
+    /**
+     * Second DFS (Depth First Search) of Kosaraju's algortihm.
+     */
     private static Map<Integer, List<Integer>> secondDfs(DirectedGraph graph,
                                                          Stack<Integer> nodeIds) {
         Set<Integer> seenNodeIds = new HashSet<>();
@@ -71,6 +86,9 @@ public class Scc {
         return leaderNodeIdToNodeIds;
     }
 
+    /**
+     * DFS in the forwards way (move from tail to head of an edge).
+     */
     private static List<Integer> forwardDfs(DirectedGraph graph, int nodeId,
                                             Set<Integer> seenNodeIds) {
         // search all the nodes in forwards
@@ -87,6 +105,14 @@ public class Scc {
         return sccNodeIds;
     }
 
+    /**
+     * Get SCCs of a given directed graph and return the n-largest SCCs' sizes.
+     * (comma separated String)
+     *
+     * @param graph  directed graph which you want to compute SCCs' sizes
+     * @param n  compute n-largest SCCs
+     * @return  comma separated String of n-largest SCCs' sizes
+     */
     public static String getNLargestSccSize(DirectedGraph graph, int n) {
         // find SCCs
         Set<Set<Integer>> sccs = findSccs(graph);

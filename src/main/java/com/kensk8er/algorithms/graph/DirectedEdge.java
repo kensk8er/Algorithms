@@ -44,6 +44,12 @@ public class DirectedEdge extends AbstractEdge {
         this.headNodeId = headNodeId;
     }
 
+    /**
+     * Generate a list of edges from pairs of integers.
+     *
+     * @param nodeIdPairs  pairs of integers that correspond to tail ID and head ID
+     * @return list of edges
+     */
     public static List<Edge> genEdgesByIds(List<Pair<Integer, Integer>> nodeIdPairs) {
         List<Edge> edges = new ArrayList<>();
         for (Pair<Integer, Integer> nodeIdPair: nodeIdPairs) {
