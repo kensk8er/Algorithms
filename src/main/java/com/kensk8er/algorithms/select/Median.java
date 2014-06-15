@@ -1,5 +1,9 @@
 package main.java.com.kensk8er.algorithms.select;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -79,5 +83,27 @@ public class Median {
             medianNum = median.streamMedian(number);
         }
         return medianNum;
+    }
+
+    public static void main (String[] args) {
+        int medianSum = 0;
+        try {
+
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
+            String line = br.readLine();
+            Median median = new Median();
+
+            while (line != null) {
+                int number = Integer.parseInt(line.replace("\n", ""));
+                medianSum += median.streamMedian(number);
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(medianSum % 10000);
     }
 }
