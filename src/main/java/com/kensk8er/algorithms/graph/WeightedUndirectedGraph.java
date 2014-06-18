@@ -2,6 +2,7 @@ package main.java.com.kensk8er.algorithms.graph;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,28 @@ public class WeightedUndirectedGraph extends AbstractGraph {
                 if (!this.edges.contains(edge)) {
                     this.edges.add(edge);
                 }
+            }
+        }
+    }
+
+    /**
+     * Initialize a WeightedUndirectedGraph object from a collection of edges.
+     *
+     * @param edges  collection of edges
+     */
+    public WeightedUndirectedGraph(Collection<Edge> edges) {
+        super();
+        for (Edge edge: edges) {
+            this.edges.add(edge);
+
+            int tailNodeId = edge.getTailNodeId();
+            if (!this.nodeIds.contains(tailNodeId)) {
+                this.nodeIds.add(tailNodeId);
+            }
+
+            int headNodeId = edge.getHeadNodeId();
+            if (!this.nodeIds.contains(headNodeId)) {
+                this.nodeIds.add(headNodeId);
             }
         }
     }

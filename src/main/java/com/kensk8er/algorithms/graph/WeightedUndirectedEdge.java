@@ -16,7 +16,7 @@ public class WeightedUndirectedEdge extends UndirectedEdge {
      * @param nodeId2 nodeID that an edge points from/to
      * @param length  length between the 2 nodes
      */
-    WeightedUndirectedEdge(int nodeId1, int nodeId2, int length) {
+    public WeightedUndirectedEdge(int nodeId1, int nodeId2, int length) {
         super(nodeId1, nodeId2);
         this.length = length;
     }
@@ -27,7 +27,7 @@ public class WeightedUndirectedEdge extends UndirectedEdge {
      *
      * @param edge weighted undirected edge object which you want to copy
      */
-    WeightedUndirectedEdge(WeightedUndirectedEdge edge) {
+    public WeightedUndirectedEdge(WeightedUndirectedEdge edge) {
         super(edge);
         this.length = edge.length;
     }

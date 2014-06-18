@@ -23,6 +23,13 @@ public interface Graph {
     Edge sampleEdge();
 
     /**
+     * Sample a node ID uniformly randomly from the graph.
+     *
+     * @return sampled node ID
+     */
+    int sampleNodeId();
+
+    /**
      * @return the number of edges the graph has
      */
     int getNumEdges();

@@ -36,6 +36,12 @@ abstract class AbstractGraph implements Graph {
     }
 
     @Override
+    public int sampleNodeId() {
+        int randomId = new Random().nextInt(this.getNumNodes());
+        return new ArrayList<>(this.nodeIds).get(randomId);
+    }
+
+    @Override
     public int getNumEdges() {
         return this.edges.size();
     }
