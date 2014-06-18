@@ -22,6 +22,12 @@ public class Median {
         this.highHeap = new Heap(Heap.HeapType.MIN);
     }
 
+    /**
+     * Add an element to the internal heaps and compute the median value at the same time.
+     *
+     * @param element  new element to add to the heaps
+     * @return new median value after adding the element
+     */
     public int streamMedian(int element) {
         int returnValue;
         if (this.lowHeap.isEmpty()) {
@@ -75,6 +81,12 @@ public class Median {
         return returnValue;
     }
 
+    /**
+     * Get the median value of a list of integers.
+     *
+     * @param numbers  list of integers
+     * @return the median value of the list
+     */
     public static int getMedian(List<Integer> numbers) {
         assert numbers.size() > 0: "numbers.size == 0";
         Median median = new Median();
@@ -85,6 +97,11 @@ public class Median {
         return medianNum;
     }
 
+    /**
+     * Just for some debug.
+     *
+     * @param args
+     */
     public static void main (String[] args) {
         int medianSum = 0;
         try {
