@@ -16,6 +16,12 @@ import java.util.Set;
  */
 public class Mst {
 
+    /**
+     * Compute Minimum Spanning Tree (MST) of the given graph and return it.
+     *
+     * @param graph  weighted undirected graph
+     * @return edges that compose an MST
+     */
     public static List<Edge> getMst(WeightedUndirectedGraph graph) {
         Set<Integer> exploredNodes = new HashSet<>();
         exploredNodes.add(graph.sampleNodeId());
@@ -50,6 +56,12 @@ public class Mst {
         return mst;
     }
 
+    /**
+     * Compute the total weight of the MST of the graph.
+     *
+     * @param graph  weighted undirected graph
+     * @return total cost of the MST
+     */
     public static long getMstCost(WeightedUndirectedGraph graph) {
         List<Edge> mst = getMst(graph);
         long cost = 0L;
@@ -59,6 +71,11 @@ public class Mst {
         return cost;
     }
 
+    /**
+     * Just for some debug.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         List<Edge> edges = new ArrayList<>();
         try {
