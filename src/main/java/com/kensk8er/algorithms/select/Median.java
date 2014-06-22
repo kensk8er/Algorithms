@@ -1,5 +1,7 @@
 package main.java.com.kensk8er.algorithms.select;
 
+import main.java.com.kensk8er.algorithms.heap.Heap;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
