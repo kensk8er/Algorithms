@@ -11,10 +11,13 @@ import java.util.*;
 /**
  * Created by kensk8er
  *
- * Implementation of Humann coding (loss-less data compression algorithm).
+ * Implementation of Huffman coding (loss-less data compression algorithm).
  */
 public class Huffman {
 
+    /**
+     * Data structure used in order to store the tree structure of symbols and their coding.
+     */
     private static class Symbol {
         Object symbol;
         Symbol left;
@@ -27,6 +30,13 @@ public class Huffman {
         }
     }
 
+    /**
+     * Compute the most efficient binary coding of each symbol given based on their weight
+     * (e.g. frequency) using Huffman's algorithm.
+     *
+     * @param symbolToWeight  mapping from symbol (e.g. character) to its weight (e.g. frequency)
+     * @return mapping from symbol to its binary encoding (e.g. 100010)
+     */
     public static Map<Object, List<Byte>> getSymbolToCode(Map<Object, Integer> symbolToWeight) {
         Map<Symbol, Integer> symbolObjectToWeight = convertToSymbolObjects(symbolToWeight);
 
@@ -78,9 +88,19 @@ public class Huffman {
         return symbolToCode;
     }
 
-    private static Map<Object, List<Byte>> getSymbolToCode(Symbol symbol,
-                                                       Map<Object, List<Byte>> symbolToCode,
-                                                       List<Byte> code) {
+    /**
+     * Get the mapping from Symbol to its encoding using Symbol data structure (binary tree).
+     *
+     * This method is recursively applied for computing the complete mapping from symbol to
+     * encoding.
+     *
+     * @param symbol  current symbol we're looking at in the tree
+     * @param symbolToCode  mapping from symbol to encoding (updated in each recursive call)
+     * @param code  encoding we've got so far at the node in the tree
+     * @return mapping from symbol to encoding
+     */
+    private static Map<Object, List<Byte>> getSymbolToCode(
+            Symbol symbol, Map<Object, List<Byte>> symbolToCode, List<Byte> code) {
         if (symbol.symbol != null) {
             // symbol is a leaf node
             symbolToCode.put(symbol, code);
@@ -100,9 +120,14 @@ public class Huffman {
         return symbolToCode;
     }
 
+    /**
+     * Convert symbol in the mapping to symbol data structure.
+     *
+     * @param symbolToWeight  mapping from symbol to weight (symbol is Object type)
+     * @return  mapping from symbol to weight (symbol is converted to Symbol type)
+     */
     private static Map<Symbol, Integer> convertToSymbolObjects(
             Map<Object, Integer> symbolToWeight) {
-        // convert symbols to Symbol objects
         Map<Symbol, Integer> symbolObjectToWeight = new HashMap<>();
         Set<Object> symbols = symbolToWeight.keySet();
         for (Object symbol: symbols) {
@@ -112,10 +137,24 @@ public class Huffman {
         return symbolObjectToWeight;
     }
 
+    /**
+     * Compute the maximum code length (the number of bits required for coding a symbol) for mapping
+     * from symbol to its weight (e.g. frequency).
+     *
+     * @param symbolToWeight  mapping from symbol (e.g. character) to its weight (e.g. frequency)
+     * @return the maximum code length (the number of bits required for coding a symbol)
+     */
     public static int getMaxCodeLen(Map<Object, Integer> symbolToWeight) {
         return getMaxMinCodeLen(symbolToWeight, true);
     }
 
+    /**
+     * Compute the minimum code length (the number of bits required for coding a symbol) for mapping
+     * from symbol to its weight (e.g. frequency).
+     *
+     * @param symbolToWeight  mapping from symbol (e.g. character) to its weight (e.g. frequency)
+     * @return the minimum code length (the number of bits required for coding a symbol)
+     */
     public static int getMinCodeLen(Map<Object, Integer> symbolToWeight) {
         return getMaxMinCodeLen(symbolToWeight, false);
     }
@@ -135,6 +174,11 @@ public class Huffman {
         return maxMinCodeLen;
     }
 
+    /**
+     * Just for some debug.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Map<Object, Integer> symbolToWeight = new HashMap<>();
 

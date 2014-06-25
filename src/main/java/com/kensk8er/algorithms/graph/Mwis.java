@@ -11,9 +11,18 @@ import static main.java.com.kensk8er.algorithms.sort.QuickSort.sort;
 
 /**
  * Created by kensk8er
+ *
+ * Mwis class implements an algorithm to compute Maximum Weight Independent Set (MWIS) of a path
+ * graph using dynamic programming.
  */
 public class Mwis {
 
+    /**
+     * Compute MWIS of the given path graph (list of node weights) using dynamic programming.
+     *
+     * @param nodes  list of node weights
+     * @return node IDs that compose MWIS of the path graph
+     */
     public static List<Integer> getMwis(List<Integer> nodes) {
         // table to store the weight of sub-graphs
         // i-th entry corresponds to the weight of sub-graph which has nodes[0:i]
@@ -49,6 +58,12 @@ public class Mwis {
         return sort(mwis);
     }
 
+    /**
+     * Get the sum of the weights of the nodes that compose MWIS of the given path graph.
+     *
+     * @param nodes  list of node weights
+     * @return the sum of the weights of nodes composing MWIS of the given path graph
+     */
     public static int getMwisWeight(List<Integer> nodes) {
         List<Integer> mwis = getMwis(nodes);
         int sum = 0;
@@ -58,6 +73,11 @@ public class Mwis {
         return sum;
     }
 
+    /**
+     * Just for some debug.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         List<Integer> nodes = new ArrayList<>();
 
