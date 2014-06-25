@@ -10,11 +10,23 @@ import java.util.Map;
 
 /**
  * Created by kensk8er
+ *
+ * Combinatorics class implements algorithms relating to combinatorics.
  */
 public class Combinatorics {
 
+    /**
+     * This is a cache used for implementing memoization for a method.
+     */
     static Map<Pair<Integer, Integer>, List<List<Integer>>> combinatorialCache = new HashMap<>();
 
+    /**
+     * Compute combinatorial of choosing k elements from n elements (nCk).
+     *
+     * @param n  total number of elements
+     * @param k  the number of elements to choose
+     * @return the number of possible combinations
+     */
     public static int countCombinatorial(int n, int k) {
         if (k == 0) {
             return 1;
@@ -23,6 +35,13 @@ public class Combinatorics {
         }
     }
 
+    /**
+     * Return list of ID combinations for nCk (combinatorial) operation.
+     *
+     * @param n  total number of elements
+     * @param k  the number of elements to choose
+     * @return list of ID combinations
+     */
     public static List<List<Integer>> combinatorial(int n, int k) {
         assert n >= k: "n < k";
 

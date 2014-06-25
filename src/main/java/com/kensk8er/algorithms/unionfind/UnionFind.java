@@ -6,6 +6,8 @@ import java.util.*;
  * Created by kensk8er
  *
  * Implementation of Union Find data structure.
+ *
+ * https://en.wikipedia.org/wiki/Disjoint-set_data_structure
  */
 public class UnionFind {
 
@@ -19,6 +21,11 @@ public class UnionFind {
         this.leaderToCount = new HashMap<>();
     }
 
+    /**
+     * Instantiate a union find data structure from list of elements.
+     *
+     * @param elements  list of elements
+     */
     public UnionFind(List<Object> elements) {
         this();
 
@@ -29,6 +36,11 @@ public class UnionFind {
         }
     }
 
+    /**
+     * Instantiate a union find data structure from set of integers.
+     *
+     * @param elements  set of integers
+     */
     public UnionFind(Set<Integer> elements) {
         this();
 
@@ -41,14 +53,33 @@ public class UnionFind {
         }
     }
 
+    /**
+     * Return true if both elements are in the same set. (Run in O(1) time.)
+     *
+     * @param element1  first element
+     * @param element2  second element
+     * @return true if elements are in the same set, false otherwise.
+     */
     public boolean inSameSet(Object element1, Object element2) {
         return find(element1).equals(find(element2));
     }
 
+    /**
+     * Find and return the leader (element that represents a set) of the element.
+     *
+     * @param element  element which you want to find its leader
+     * @return leader element of the set the given element belongs to
+     */
     public Object find(Object element) {
         return this.elementToLeader.get(element);
     }
 
+    /**
+     * Unify two sets which element1 and element2 belong to.
+     *
+     * @param element1  1st element
+     * @param element2  2nd element
+     */
     public void union(Object element1, Object element2) {
         if (this.inSameSet(element1, element2)) {
             // do nothing if they've already belonged to the same set
@@ -90,6 +121,11 @@ public class UnionFind {
         return clusters;
     }
 
+    /**
+     * Return the number of clusters/sets.
+     *
+     * @return the number of clusters/sets
+     */
     public int getClusterNum() {
         return this.leaderToCount.size();
     }

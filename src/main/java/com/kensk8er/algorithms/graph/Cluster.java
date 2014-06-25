@@ -26,6 +26,13 @@ public class Cluster {
         this.maxSpace = 0;
     }
 
+    /**
+     * Compute k clusters of the given graph using Kruskal's algorithm.
+     *
+     * @param graph  weighted undirected graph
+     * @param k  the number of clusters you look for
+     * @return Cluster object
+     */
     public static Cluster getClusters(WeightedUndirectedGraph graph, int k) {
         // initialize union find
         UnionFind unionFind = new UnionFind(graph.getNodeIds());
@@ -81,6 +88,15 @@ public class Cluster {
         return clusters;
     }
 
+    /**
+     * Compute the number of clusters for the given nodes (represented as one-hot encoded features)
+     * which max-space computed by hamming distance is the given value.
+     *
+     * @param nodes  nodes which you want to compute clusters from
+     * @param maxSpace  minimum space between clusters (the space you want to maximize)
+     * @param bitSize  the number of bits in the one-hot encoded features
+     * @return the number of clusters in the nodes
+     */
     public static int getClusterNumByHammingDistanceAndMaxSpace(List<Integer> nodes,
                                                                 int maxSpace, int bitSize) {
         // first loop to collect mapping from node (binary with edits) to nodeId
@@ -134,6 +150,11 @@ public class Cluster {
         return unionFind.getClusterNum();
     }
 
+    /**
+     * Just for some debug.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         List<Edge> edges = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
