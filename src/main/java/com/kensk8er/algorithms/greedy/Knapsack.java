@@ -24,8 +24,35 @@ public class Knapsack {
 
     public static List<Integer> getKnapsackItems(int capacity, List<Pair<Integer, Integer>> items) {
         int[][] A = solveKnapsackRecursive(capacity, items);
-        // TODO: implement backtrack
-        return new ArrayList<>();
+        List<Integer> knapsackItemIds = new ArrayList<>();
+
+        // backtrack the items included using A
+        for (int itemId = items.size() - 1; itemId > 0; itemId--) {
+            Pair<Integer, Integer> item = items.get(itemId);
+            int value = item.getLeft();
+            int weight = item.getRight();
+
+            int valueWithItem = 0;
+            if (weight <= capacity) {
+                valueWithItem = value + A[itemId - 1][capacity - weight];
+            }
+            int valueWithoutItem = A[itemId - 1][capacity];
+
+            if (valueWithItem > valueWithoutItem) {
+                capacity -= weight;
+                knapsackItemIds.add(itemId);
+            }
+        }
+
+        // final one item
+        Pair<Integer, Integer> item = items.get(0);
+        int value = item.getLeft();
+        int weight = item.getRight();
+        if (weight <= capacity) {
+            knapsackItemIds.add(0);
+        }
+
+        return knapsackItemIds;
     }
 
     private static int[][] solveKnapsackRecursive(int capacity,
