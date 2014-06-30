@@ -17,11 +17,27 @@ import java.util.List;
  */
 public class Knapsack {
 
+    /**
+     * Get the optimal value of the knapsack problem with the given capacity and list of items
+     * (value/weight pairs).
+     *
+     * @param capacity  capacity of the knapsack (maximum weight allowed)
+     * @param items  list of pairs of value/weight items
+     * @return the optimal value of the knapsack problem (sum of item values in the knapsack)
+     */
     public static int getKnapsackValue(int capacity, List<Pair<Integer, Integer>> items) {
         int[][] A = solveKnapsackRecursive(capacity, items);
         return A[items.size() - 1][capacity];
     }
 
+    /**
+     * Get the optimal items of the knapsack problem with the given capacity and list of items
+     * (value/weight pairs).
+     *
+     * @param capacity  capacity of the knapsack (maximum weight allowed)
+     * @param items  list of pairs of value/weight items
+     * @return list of itemIds that achieves the optimal value
+     */
     public static List<Integer> getKnapsackItems(int capacity, List<Pair<Integer, Integer>> items) {
         int[][] A = solveKnapsackRecursive(capacity, items);
         List<Integer> knapsackItemIds = new ArrayList<>();
@@ -55,6 +71,13 @@ public class Knapsack {
         return knapsackItemIds;
     }
 
+    /**
+     * Recursive implementation of knapsack problem. Runs faster than solveKnapsack.
+     *
+     * @param capacity  capacity of the knapsack (maximum weight allowed)
+     * @param items  list of pairs of value/weight items
+     * @return dynamic table A that records optimal values for sub-problems
+     */
     private static int[][] solveKnapsackRecursive(int capacity,
                                                   List<Pair<Integer, Integer>> items) {
         int[][] A = new int[items.size()][capacity + 1];
@@ -62,6 +85,15 @@ public class Knapsack {
         return A;
     }
 
+    /**
+     * Recursive implementation of knapsack problem. Runs faster than solveKnapsack.
+     *
+     * @param items  list of pairs of value/weight items
+     * @param itemId  itemId of the sub-problem
+     * @param capacity  capacity of the sub-problem
+     * @param A  dynamic table that records optimal values for sub-problems
+     * @return optimal value of the sub-problem
+     */
     private static int solveKnapsackRecursive(List<Pair<Integer, Integer>> items, int itemId,
                                                int capacity, int[][] A) {
         // return the value if it's already computed
@@ -104,6 +136,13 @@ public class Knapsack {
         }
     }
 
+    /**
+     * Naive implementation of knapsack problem. solveKnapsackRecursive runs faster.
+     *
+     * @param capacity  capacity of the knapsack (maximum weight allowed)
+     * @param items  list of pairs of value/weight items
+     * @return dynamic table A that records optimal values for sub-problems
+     */
     private static int[][] solveKnapsack(int capacity, List<Pair<Integer, Integer>> items) {
         // A[:][0] are initialized as 0 and they stay 0
         int[][] A = new int[items.size()][capacity + 1];
@@ -146,6 +185,11 @@ public class Knapsack {
         return A;
     }
 
+    /**
+     * Just for some debugs.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         List<Pair<Integer, Integer>> items1 = new ArrayList<>();
         int capacity1 = 0;
