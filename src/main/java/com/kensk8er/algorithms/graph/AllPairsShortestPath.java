@@ -20,6 +20,34 @@ public class AllPairsShortestPath {
     // positive infinite distance
     private static final int INFINITE = Integer.MAX_VALUE / 2;
 
+    /**
+     * Get the shortest distances between all the pairs of nodes in the given graph.
+     *
+     * @param graph  a WeightedDirectedGraph object
+     * @return the shortest distances between all the pairs of nodes in the graph
+     */
+    public static List<List<Integer>> getShortestDists(WeightedDirectedGraph graph) {
+        int[][][] A = solveAllPairsShortestPath(graph);
+        int n = graph.getNumNodes();
+        List<List<Integer>> shortestDists = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            List<Integer> subList = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                subList.add(A[i][j][n]);
+            }
+            shortestDists.add(subList);
+        }
+
+        return shortestDists;
+    }
+
+    /**
+     * Get the shortest distance between distinct two nodes in the given graph.
+     *
+     * @param graph  a WeightedDirectedGraph object
+     * @return the shortest distance between distinct two nodes
+     */
     public static Integer getShortestDist(WeightedDirectedGraph graph) {
         int[][][] A = solveAllPairsShortestPath(graph);
         int n = graph.getNumNodes();
@@ -43,6 +71,12 @@ public class AllPairsShortestPath {
         return shortestDist;
     }
 
+    /**
+     * Solve all the sub-problems of All Pairs Shortest Path problem (Floyd-Warshall algorithm).
+     *
+     * @param graph  a WeightedDirectedGraph object
+     * @return dynamic table A that records the answers to all the sub-problems
+     */
     private static int[][][] solveAllPairsShortestPath(WeightedDirectedGraph graph) {
         int n = graph.getNumNodes();
         int[][][] A = new int[n][n][n + 1];
@@ -72,6 +106,11 @@ public class AllPairsShortestPath {
         return A;
     }
 
+    /**
+     * Just for some debugs.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Integer shortestShortest = null;
         for (String arg: args) {
