@@ -9,11 +9,10 @@ import java.util.List;
 
 /**
  * Created by kensk8er
+ *
+ * MergeSort class implements merge sort on List<Integer>. It runs in N*log(N) time.
  */
 public class MergeSort {
-    /**
-     * MergeSort class implements merge sort on List<Integer>. It runs in N*log(N) time.
-     */
 
     /**
      * Count the number of inversions and return it.
