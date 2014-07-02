@@ -246,6 +246,15 @@ public class Tsp {
         return getOptimalDist(distance);
     }
 
+    /**
+     * Compute the sum of distances (the smallest sum of distances achievable) of the Euclidean TSP
+     * using the greedy algorithm (always go to the closest node that hasn't been visited yet).
+     *
+     * Note that the greedy algorithm doesn't guarantee the optimal solution.
+     *
+     * @param coordinates  list of coordinates
+     * @return the optimal sum of distances
+     */
     public static double getOptimalDistGreedy(List<List<Double>> coordinates) {
         double totalDist = 0d;
         List<Double> curCoordinate = coordinates.get(0);
