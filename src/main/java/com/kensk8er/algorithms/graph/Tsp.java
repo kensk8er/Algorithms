@@ -18,11 +18,20 @@ public class Tsp {
 
     private static final float INFINITE = Float.POSITIVE_INFINITY;
 
+    /**
+     * Data structure that stores all the distances between every possible nodes.
+     */
     private static class Distance {
 
         private float[][] distances;
-        private int pointNum;
+        private int pointNum;  // the number of nodes in the graph
 
+        /**
+         * Initialize Distance object from the list of coordinates (each coordinate has its location
+         * encoded as x-dimensional float (represented by a list of floats).
+         *
+         * @param coordinates  list of coordinates (each coordinate is a list of floats)
+         */
         private Distance(List<List<Float>> coordinates) {
             this.pointNum = coordinates.size();
             this.distances = new float[pointNum][pointNum];
@@ -39,6 +48,13 @@ public class Tsp {
             }
         }
 
+        /**
+         * Compute the Euclidean distance between two coordinates.
+         *
+         * @param coordinateI  1st coordinate
+         * @param coordinateJ  2nd coordinate
+         * @return distance between the 2 coordinates
+         */
         public static float computeDist(List<Float> coordinateI, List<Float> coordinateJ) {
             int dim = coordinateI.size();
             float dist = 0;
@@ -58,6 +74,15 @@ public class Tsp {
         }
     }
 
+    /**
+     * Convert an array of member IDs to bits (represented as a single integer) that encode the
+     * information of what member IDs there are.
+     *
+     * E.g. {0, 2, 3} -> 1101 (bits) -> 13 (integer)
+     *
+     * @param memberIds  array of member IDs
+     * @return bits that encode what member IDs there are (in the form of integer)
+     */
     private static int memberIdsToBit(int[] memberIds) {
         int bit = 0;
         for (int memberId: memberIds) {
@@ -66,6 +91,15 @@ public class Tsp {
         return bit;
     }
 
+    /**
+     * Convert a list of member IDs to bits (represented as a single integer) that encode the
+     * information of what member IDs there are.
+     *
+     * E.g. {0, 2, 3} -> 1101 (bits) -> 13 (integer)
+     *
+     * @param memberIds  list of member IDs
+     * @return bits that encode what member IDs there are (in the form of integer)
+     */
     private static int memberIdsToBit(List<Integer> memberIds) {
         int bit = 0;
         for (int memberId: memberIds) {
@@ -74,6 +108,13 @@ public class Tsp {
         return bit;
     }
 
+    /**
+     * Compute the optimal sum of distances (the smallest sum of distances achievable) of the
+     * Euclidean TSP.
+     *
+     * @param distance  Distance object (DS that stores all the distances between nodes)
+     * @return the optimal sum of distances
+     */
     private static float getOptimalDist(Distance distance) {
         int pointNum = distance.getPointNum();
 
@@ -154,6 +195,18 @@ public class Tsp {
         return minDist;
     }
 
+    /**
+     * Return an array that starts from `start` and ends with `end - 1`.
+     *
+     * E.g.
+     * range(2, 5) -> {2, 3, 4}
+     *
+     * (Analogous to range function in Python.)
+     *
+     * @param start  start value
+     * @param end  end value
+     * @return array that starts from `start` and ends with `end - 1`.
+     */
     private static int[] range(int start, int end) {
         int[] range = new int[end - start];
         for (int i = start; i < end; i++) {
@@ -162,11 +215,23 @@ public class Tsp {
         return range;
     }
 
+    /**
+     * Compute the optimal sum of distances (the smallest sum of distances achievable) of the
+     * Euclidean TSP.
+     *
+     * @param coordinates  list of coordinates
+     * @return the optimal sum of distances
+     */
     public static float getOptimalDist(List<List<Float>> coordinates) {
         Distance distance = new Distance(coordinates);
         return getOptimalDist(distance);
     }
 
+    /**
+     * Just for some debugs.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         List<List<Float>> coordinates = new ArrayList<>();
         try {
