@@ -13,6 +13,8 @@ import static main.java.com.kensk8er.algorithms.integer.Combinatorics.combinator
  *
  * Tsp class implements an algorithm that solves Euclidean Traveling Salesman Problem
  * (Euclidean TSP) using Dynamic Programming (DP).
+ *
+ * It also implements the solution using Greedy Heuristics (c.f. getOptimalDistGreedy).
  */
 public class Tsp {
 
@@ -62,6 +64,23 @@ public class Tsp {
                 dist += Math.pow(coordinateI.get(d) - coordinateJ.get(d), 2);
             }
             dist = (float) Math.sqrt(dist);
+            return dist;
+        }
+
+        /**
+         * Compute the Euclidean distance between two coordinates.
+         *
+         * @param coordinateI  1st coordinate
+         * @param coordinateJ  2nd coordinate
+         * @return distance between the 2 coordinates
+         */
+        public static double computeDistDouble(List<Double> coordinateI, List<Double> coordinateJ) {
+            int dim = coordinateI.size();
+            double dist = 0;
+            for (int d = 0; d < dim; d++) {
+                dist += Math.pow(coordinateI.get(d) - coordinateJ.get(d), 2);
+            }
+            dist = Math.sqrt(dist);
             return dist;
         }
 
@@ -225,6 +244,44 @@ public class Tsp {
     public static float getOptimalDist(List<List<Float>> coordinates) {
         Distance distance = new Distance(coordinates);
         return getOptimalDist(distance);
+    }
+
+    public static double getOptimalDistGreedy(List<List<Double>> coordinates) {
+        double totalDist = 0d;
+        List<Double> curCoordinate = coordinates.get(0);
+
+        // construct a linked list storing all the nodeIds we need to visit
+        List<Integer> toVisitIds = new LinkedList<>();
+        for (int i = 1; i < coordinates.size(); i++) {
+            toVisitIds.add(i);
+        }
+
+        // look for the nearest node and remove it until you visit all the nodes
+        while (!toVisitIds.isEmpty()) {
+            double minDist = Double.MAX_VALUE;
+            int minNodeId = 0;  // this 0 will always be overwritten
+
+            // look for the nearest node
+            for (int nodeId: toVisitIds) {
+                List<Double> coordinate = coordinates.get(nodeId);
+                double dist = Distance.computeDistDouble(curCoordinate, coordinate);
+
+                if (dist < minDist) {
+                    minDist = dist;
+                    minNodeId = nodeId;
+                }
+            }
+
+            // remove the nearest node and add the distance, move the curCoordinate
+            curCoordinate = coordinates.get(minNodeId);
+            totalDist += minDist;
+            toVisitIds.remove((Object) minNodeId);
+        }
+
+        // go back to the start (0-th) node
+        totalDist += Distance.computeDistDouble(curCoordinate, coordinates.get(0));
+
+        return totalDist;
     }
 
     /**

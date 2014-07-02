@@ -2,10 +2,16 @@ package test.java.com.kensk8er.algorithms.graph;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static main.java.com.kensk8er.algorithms.graph.Tsp.getOptimalDist;
+import static main.java.com.kensk8er.algorithms.graph.Tsp.getOptimalDistGreedy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -93,4 +99,34 @@ class TspTest {
         assertEquals(getOptimalDist(coordinates8), 4.00f, 0.01f);
     }
 
+    @Test
+    void testGetOptimalDistGreedy() {
+        List<List<Double>> coordinates = new ArrayList<>();
+
+        // read data from the test file
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("resources/nn.txt"));
+            String line = br.readLine();  // ignore the first line
+            line = br.readLine();
+
+            while (line != null) {
+                String[] elements = line.replace("\n", "").split(" ");
+                List<Double> coordinate = Arrays.asList(
+                        Double.parseDouble(elements[1]), Double.parseDouble(elements[2]));
+                coordinates.add(coordinate);
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals((int) getOptimalDistGreedy(coordinates.subList(0, 50)), 2470);
+        assertEquals((int) getOptimalDistGreedy(coordinates.subList(0, 1000)), 48581);
+        assertEquals((int) getOptimalDistGreedy(coordinates.subList(0, 5000)), 188129);
+
+        // this test case takes very long to finish
+        // assertEquals((int) getOptimalDistGreedy(coordinates), 1203406);
+    }
 }
