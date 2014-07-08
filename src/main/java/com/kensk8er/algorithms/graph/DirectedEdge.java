@@ -18,7 +18,7 @@ public class DirectedEdge extends AbstractEdge {
      * @param tailNodeId  ID of the tail node
      * @param headNodeId  ID of the head node
      */
-    DirectedEdge(int tailNodeId, int headNodeId) {
+    public DirectedEdge(int tailNodeId, int headNodeId) {
         super();
         this.tailNodeId = tailNodeId;
         this.headNodeId = headNodeId;
@@ -30,7 +30,7 @@ public class DirectedEdge extends AbstractEdge {
      *
      * @param edge  directed edge object which you want to copy
      */
-    DirectedEdge(DirectedEdge edge) {
+    public DirectedEdge(DirectedEdge edge) {
         super(edge);
     }
 
