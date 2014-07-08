@@ -60,6 +60,11 @@ public class TwoSat {
         return true;
     }
 
+    /**
+     * Just for some debugs.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         for (String filePath: args) {
             List<Pair<Integer, Integer>> clauses = new ArrayList<>();
